@@ -40,8 +40,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		// save the customer
-		currentSession.save(theCustomer);
+		// save/update the customer
+		currentSession.saveOrUpdate(theCustomer);
 		
 	}
 
@@ -50,6 +50,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Customer theCustomer = currentSession.get(Customer.class, theId);
 		return theCustomer;
+	}
+
+	@Override
+	public void deleteCustomer(Customer theCustomer) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.delete(theCustomer);
+		
 	}
 
 }
